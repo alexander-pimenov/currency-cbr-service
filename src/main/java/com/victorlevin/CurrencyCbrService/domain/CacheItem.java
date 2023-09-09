@@ -9,8 +9,8 @@ import java.util.Objects;
 @AllArgsConstructor
 @Value
 public class CacheItem {
-    private String date;
-    private List<CurrencyRate> currencyRateList;
+    String date;
+    List<CurrencyRate> currencyRateList;
 
     @Override
     public boolean equals(Object o) {

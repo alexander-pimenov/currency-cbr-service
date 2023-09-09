@@ -1,5 +1,6 @@
 package com.victorlevin.CurrencyCbrService.controller;
 
+import com.victorlevin.CurrencyCbrService.domain.CurrencyNamesAndCharCodesDto;
 import com.victorlevin.CurrencyCbrService.domain.CurrencyRate;
 import com.victorlevin.CurrencyCbrService.service.RateService;
 import lombok.RequiredArgsConstructor;
@@ -17,5 +18,10 @@ public class RateController {
     @GetMapping("/{charCode}")
     public CurrencyRate getRateByCharCode(@PathVariable String charCode) {
         return rateService.getRateByCharCode(charCode);
+    }
+
+    @GetMapping("/names-and-char-codes")
+    public CurrencyNamesAndCharCodesDto getNamesAndCharCodes(){
+        return rateService.getNamesAndCharCodes();
     }
 }

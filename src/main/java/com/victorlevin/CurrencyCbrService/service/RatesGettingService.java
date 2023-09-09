@@ -1,6 +1,8 @@
 package com.victorlevin.CurrencyCbrService.service;
 
 import com.victorlevin.CurrencyCbrService.cbrclient.CbrClient;
+import com.victorlevin.CurrencyCbrService.domain.CurrencyNameAndCharCode;
+import com.victorlevin.CurrencyCbrService.domain.CurrencyNamesAndCharCodesDto;
 import com.victorlevin.CurrencyCbrService.domain.CurrencyNominalRate;
 import com.victorlevin.CurrencyCbrService.domain.CurrencyRate;
 import com.victorlevin.CurrencyCbrService.parser.Parser;
@@ -21,7 +23,7 @@ public class RatesGettingService {
 
     @Cacheable("rates")
     public List<CurrencyRate> getCurrencyRates(String date) {
-        log.info("Getting rates from CBR.");
+        log.info("RatesGettingService#getCurrencyRates - Getting rates from CBR.");
         String xmlCbr = cbrClient.getRatesByCbr();
         List<CurrencyNominalRate> nominalRateList = parser.parse(xmlCbr);
         return nominalRateList.stream().map(n ->
@@ -29,5 +31,18 @@ public class RatesGettingService {
                         n.getCharCode(),
                         Double.parseDouble(n.getValue()) / Double.parseDouble(n.getNominal())))
                 .collect(Collectors.toList());
+    }
+
+    @Cacheable("namesAndCharCodes")
+    public CurrencyNamesAndCharCodesDto getAllCurrencyRates() {
+        log.info("RatesGettingService#getAllCurrencyRates - Getting rates from CBR.");
+        String xmlCbr = cbrClient.getRatesByCbr();
+        List<CurrencyNominalRate> nominalRateList = parser.parse(xmlCbr);
+        List<CurrencyNameAndCharCode> collect = nominalRateList.stream().map(n ->
+                new CurrencyNameAndCharCode(
+                        n.getCharCode(),
+                        n.getName()))
+                .collect(Collectors.toList());
+        return new CurrencyNamesAndCharCodesDto(collect);
     }
 }

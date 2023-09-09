@@ -8,9 +8,9 @@ import lombok.Value;
 @AllArgsConstructor
 @Builder
 public class CurrencyNominalRate {
-    private String numCode;
-    private String charCode;
-    private String nominal;
-    private String name;
-    private String value;
+    String numCode;
+    String charCode;
+    String nominal;
+    String name;
+    String value;
 }

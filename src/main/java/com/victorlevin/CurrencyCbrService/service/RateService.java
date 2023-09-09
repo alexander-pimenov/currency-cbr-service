@@ -1,5 +1,6 @@
 package com.victorlevin.CurrencyCbrService.service;
 
+import com.victorlevin.CurrencyCbrService.domain.CurrencyNamesAndCharCodesDto;
 import com.victorlevin.CurrencyCbrService.domain.CurrencyRate;
 import com.victorlevin.CurrencyCbrService.exception.CurrencyRateNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -28,4 +29,7 @@ public class RateService {
     }
 
 
+    public CurrencyNamesAndCharCodesDto getNamesAndCharCodes() {
+        return ratesGettingService.getAllCurrencyRates();
+    }
 }

@@ -7,7 +7,7 @@ import lombok.Value;
 @Value
 @AllArgsConstructor
 @Builder
-public class CurrencyRate {
+public class CurrencyNameAndCharCode {
     String charCode;
-    Double value;
+    String name;
 }
